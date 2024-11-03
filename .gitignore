@@ -31,10 +31,11 @@ pom.xml.next
 release.properties
 
 # Gradle
-.gradle
+.gradle/buildOutputCleanup
 build/
 !gradle-wrapper.jar
 .gradle/
+*.gradle/
 build/
 
 # Eclipse
