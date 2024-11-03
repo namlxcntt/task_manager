@@ -26,13 +26,13 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<UserModel>> getAllUsers() {
         List<UserModel> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<UserModel> createUser(@RequestBody UserModel userModel) {
         UserModel createdUser = userService.createUser(userModel);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
