@@ -1,13 +1,16 @@
-package com.lxn.task_manager.entity;
+package com.lxn.task_manager.user.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+@Setter
+@Getter
 @Entity
-@Table(name = "Users")
+@Table(name = "users")
 @Data
 public class UserEntity {
     @Id
@@ -49,4 +52,5 @@ public class UserEntity {
         USER,
         ADMIN
     }
+
 }

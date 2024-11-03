@@ -1,9 +1,9 @@
-package com.lxn.task_manager.repository;
+package com.lxn.task_manager.user.repo;
 
-import com.lxn.task_manager.entity.UserEntity;
+import com.lxn.task_manager.user.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
-    // Có thể thêm các query method tùy ý
+
 }

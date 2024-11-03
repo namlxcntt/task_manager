@@ -1,7 +1,8 @@
 package com.lxn.task_manager.repository;
 
 
-import com.lxn.task_manager.entity.UserEntity;
+import com.lxn.task_manager.user.entity.UserEntity;
+import com.lxn.task_manager.user.repo.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class UserRepositoryTest {
         UserEntity user = new UserEntity();
         user.setUsername("testuser");
         user.setEmail("testuser@example.com");
-        user.setPasswordHash("123123123123123123");
+        user.setPasswordHash("123123123123123123sdjfhsdjkfhjsdkfhsjkdfhkjsdfhksjdfhksjdfhkjsdf");
 
         UserEntity savedUser = userRepository.save(user);
         Assertions.assertNotNull(savedUser.getUserId());
