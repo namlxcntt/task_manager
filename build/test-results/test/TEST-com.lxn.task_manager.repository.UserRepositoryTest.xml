@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.lxn.task_manager.repository.UserRepositoryTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-11-03T03:13:45" hostname="Nams-MacBook-Pro-2.local" time="0.669">
+  <properties/>
+  <testcase name="testCreateUser()" classname="com.lxn.task_manager.repository.UserRepositoryTest" time="0.669"/>
+  <system-out><![CDATA[10:13:41.757 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.lxn.task_manager.repository.UserRepositoryTest]: UserRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+10:13:41.922 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.lxn.task_manager.TaskManagerApplication for test class com.lxn.task_manager.repository.UserRepositoryTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.5)
+
+2024-11-03T10:13:42.369+07:00  INFO 36735 --- [    Test worker] c.l.t.repository.UserRepositoryTest      : Starting UserRepositoryTest using Java 17.0.13 with PID 36735 (started by namluongxuan in /Users/namluongxuan/IdeaProjects/task_manager)
+2024-11-03T10:13:42.371+07:00  INFO 36735 --- [    Test worker] c.l.t.repository.UserRepositoryTest      : The following 1 profile is active: "test"
+2024-11-03T10:13:42.880+07:00  INFO 36735 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-03T10:13:42.934+07:00  INFO 36735 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 47 ms. Found 1 JPA repository interface.
+2024-11-03T10:13:43.545+07:00  INFO 36735 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-03T10:13:43.588+07:00  INFO 36735 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2024-11-03T10:13:43.629+07:00  INFO 36735 --- [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-11-03T10:13:43.861+07:00  INFO 36735 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-03T10:13:43.885+07:00  INFO 36735 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-11-03T10:13:44.053+07:00  INFO 36735 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@e01a26b
+2024-11-03T10:13:44.057+07:00  INFO 36735 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-11-03T10:13:44.100+07:00  WARN 36735 --- [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-11-03T10:13:44.104+07:00  WARN 36735 --- [    Test worker] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2024-11-03T10:13:44.715+07:00  INFO 36735 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: drop table if exists users
+Hibernate: create table users (created_at datetime(6) not null, updated_at datetime(6), user_id bigint not null auto_increment, username varchar(50) not null, email varchar(100) not null, password_hash varchar(255) not null, role enum ('ADMIN','USER') not null, primary key (user_id)) engine=InnoDB
+Hibernate: alter table users add constraint UK6dotkott2kjsp8vw4d0m25fb7 unique (email)
+2024-11-03T10:13:44.769+07:00  INFO 36735 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-03T10:13:45.149+07:00  INFO 36735 --- [    Test worker] c.l.t.repository.UserRepositoryTest      : Started UserRepositoryTest in 3.156 seconds (process running for 4.448)
+Hibernate: insert into users (created_at,email,password_hash,role,updated_at,username) values (?,?,?,?,?,?)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
