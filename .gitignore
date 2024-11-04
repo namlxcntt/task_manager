@@ -10,6 +10,8 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
+
+
 # Package Files #
 *.jar
 *.war
@@ -93,3 +95,4 @@ spring.log
 # Others
 bin/
 tmp/
+src/main/resources/static/
