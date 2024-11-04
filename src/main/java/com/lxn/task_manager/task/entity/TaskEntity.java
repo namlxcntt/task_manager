@@ -3,12 +3,16 @@ package com.lxn.task_manager.task.entity;
 import com.lxn.task_manager.taskList.entity.TaskListEntity;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tasks")
 @Data
+@Getter
+@Setter
 public class TaskEntity {
 
     @Id
