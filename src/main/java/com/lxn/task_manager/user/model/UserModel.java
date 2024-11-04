@@ -1,6 +1,7 @@
 package com.lxn.task_manager.user.model;
 
 import com.lxn.task_manager.user.entity.UserEntity;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,4 +30,6 @@ public class UserModel {
         this.updatedAt = updatedAt;
     }
 
+    public UserModel() {
+    }
 }
