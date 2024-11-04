@@ -4,6 +4,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -12,9 +13,10 @@ import java.util.Map;
 
 @Component
 public class JwtUtils {
-    private String secretKey = "FifTP7FBYfsismu-ibgyOaLb2EM6QMf4LSxJHbDT7O4="; // Thay thế bằng khóa bí mật của bạn
-    private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
+    @Value("${app.jwt.secret}")
+    private String secretKey; // Thay thế bằng khóa bí mật của bạn
+    private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
     public String createToken(String username) {
         try {
@@ -29,7 +31,7 @@ public class JwtUtils {
                     .signWith(SignatureAlgorithm.HS256, secretKey)
                     .compact();
         } catch (Exception exception) {
-            logger.error("Error ->"+ exception.getMessage());
+            logger.error("Error ->{}", exception.getMessage());
         }
         return null;
     }
