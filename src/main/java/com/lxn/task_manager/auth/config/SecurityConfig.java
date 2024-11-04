@@ -7,6 +7,8 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -23,18 +25,24 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
+        http.csrf(csrf -> csrf
+                        .ignoringRequestMatchers("/api/public/**")
+                )
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/public/**").permitAll()
+                        .requestMatchers("/api/public/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(exceptionHandling -> {
-                            exceptionHandling
-                                    .authenticationEntryPoint(customAuthenticationEntryPoint)
-                                    .accessDeniedHandler(accessDeniedHandler);
-                        }
-                ).httpBasic(Customizer.withDefaults());
+                    exceptionHandling
+                            .authenticationEntryPoint(customAuthenticationEntryPoint)
+                            .accessDeniedHandler(accessDeniedHandler);
+                })
+                .httpBasic(Customizer.withDefaults());
         return http.build();
+    }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
     @Bean

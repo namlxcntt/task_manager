@@ -5,6 +5,7 @@ import com.lxn.task_manager.user.mapper.UserMapper;
 import com.lxn.task_manager.user.model.UserModel;
 import com.lxn.task_manager.user.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,11 +16,13 @@ public class UserServicesImpl  implements  UserServices{
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServicesImpl(UserRepository userRepository, UserMapper userMapper) {
+    public UserServicesImpl(UserRepository userRepository, UserMapper userMapper, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -39,6 +42,7 @@ public class UserServicesImpl  implements  UserServices{
     @Override
     public UserModel createUser(UserModel userModel) {
         UserEntity userEntity = userMapper.toEntity(userModel);
+        userEntity.setPasswordHash(passwordEncoder.encode(userModel.getPasswordHash()));
         UserEntity savedUser = userRepository.save(userEntity);
         return userMapper.toModel(savedUser);
     }

@@ -1,5 +1,6 @@
 package com.lxn.task_manager.core;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,6 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ApiOutput<T> {
     /**
      * Status code for api output

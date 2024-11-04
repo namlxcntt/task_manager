@@ -8,9 +8,9 @@ import lombok.Setter;
 @Setter
 @Getter
 public class AuthModel {
-    private String token;
+    private String bearToken;
 
-    public AuthModel(String token) {
-        this.token = token;
+    public AuthModel(String bearToken) {
+        this.bearToken = bearToken;
     }
 }
