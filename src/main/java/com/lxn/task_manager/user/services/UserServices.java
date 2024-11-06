@@ -44,4 +44,6 @@ public interface UserServices {
      * @param id the ID of the user to delete
      */
     void deleteUser(Long id);
+
+    UserModel findByEmail(String email);
 }
