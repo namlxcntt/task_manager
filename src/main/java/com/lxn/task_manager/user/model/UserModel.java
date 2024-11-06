@@ -1,5 +1,6 @@
 package com.lxn.task_manager.user.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lxn.task_manager.user.entity.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,7 +16,9 @@ public class UserModel {
     private Long userId;
     private String username;
     private String email;
+    @JsonIgnore
     private String passwordHash;
+    @JsonIgnore
     private UserEntity.Role role;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

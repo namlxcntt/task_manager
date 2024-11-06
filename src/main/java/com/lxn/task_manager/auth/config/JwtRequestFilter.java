@@ -1,4 +1,6 @@
 package com.lxn.task_manager.auth.config;
+
+import com.lxn.task_manager.auth.services.TokenBlacklistService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,25 +19,27 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     private final JwtUtils jwtUtil;
 
+    private final TokenBlacklistService tokenBlacklistService;
+
     @Autowired
-    public JwtRequestFilter(JwtUtils jwtUtil) {
+    public JwtRequestFilter(JwtUtils jwtUtil, TokenBlacklistService tokenBlacklistService) {
         this.jwtUtil = jwtUtil;
+        this.tokenBlacklistService = tokenBlacklistService;
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
-            throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         final String authorizationHeader = request.getHeader("Authorization");
-
         String email = null;
-        String jwt;
-
+        String jwt = "";
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             jwt = authorizationHeader.substring(7);
             email = jwtUtil.extractEmail(jwt);
         }
-
-        if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+        if (email != null && !jwt.isEmpty()
+                && jwtUtil.validateToken(jwt, email)
+                && SecurityContextHolder.getContext().getAuthentication() == null
+                && !tokenBlacklistService.isTokenBlacklisted(jwt)) {
             UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(email, null, new ArrayList<>());
             SecurityContextHolder.getContext().setAuthentication(authToken);
         }
