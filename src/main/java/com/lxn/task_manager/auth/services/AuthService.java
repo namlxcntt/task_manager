@@ -85,7 +85,6 @@ public class AuthService {
         return ResponseEntity.ok(ApiOutput.success(loginModel));
     }
 
-    // Đăng xuất
     public ResponseEntity<ApiOutput<String>> logout(String token) {
         if(token == null || token.isEmpty()) return ResponseEntity.badRequest().body(ApiOutput.failure("Token is required"));
         if(jwtUtil.validateToken(token)) {

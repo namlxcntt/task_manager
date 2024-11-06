@@ -20,7 +20,7 @@ repositories {
 
 dependencies {
     implementation 'org.projectlombok:lombok:1.18.28'
-    implementation 'mysql:mysql-connector-java:8.0.33' // Chỉ định phiên bản MySQL Connector
+    implementation 'mysql:mysql-connector-java:8.0.33'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-security'
