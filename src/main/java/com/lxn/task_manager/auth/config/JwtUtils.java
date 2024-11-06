@@ -16,7 +16,7 @@ import java.util.Map;
 public class JwtUtils {
 
     @Value("${app.jwt.secret}")
-    private String secretKey; // Thay thế bằng khóa bí mật của bạn
+    private String secretKey;
 
     public String generateToken(String username) {
         Map<String, Object> claims = new HashMap<>();
@@ -33,7 +33,7 @@ public class JwtUtils {
                 .setClaims(claims)
                 .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + expiration)) // Hết hạn sau 10 giờ
+                .setExpiration(new Date(System.currentTimeMillis() + expiration))
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
     }

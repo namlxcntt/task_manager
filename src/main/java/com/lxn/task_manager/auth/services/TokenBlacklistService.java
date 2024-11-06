@@ -10,10 +10,10 @@ public class TokenBlacklistService {
     private final Set<String> blacklist = new HashSet<>();
 
     public void blacklistToken(String token) {
-        blacklist.add(token); // Đánh dấu token là không hợp lệ
+        blacklist.add(token);
     }
 
     public boolean isTokenBlacklisted(String token) {
-        return blacklist.contains(token); // Kiểm tra token có trong blacklist không
+        return blacklist.contains(token);
     }
 }

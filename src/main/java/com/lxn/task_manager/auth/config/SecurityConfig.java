@@ -49,7 +49,7 @@ public class SecurityConfig {
                 })
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Không tạo session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .httpBasic(Customizer.withDefaults());
 
