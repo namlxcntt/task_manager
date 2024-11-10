@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 @Data
 public class TaskModel {
     private Long taskId;
-    private Long taskListId; // Chúng ta sẽ ánh xạ từ `taskList.getListId()`
+    private Long taskListId;
     private String title;
     private String description;
     private LocalDateTime dueDate;
