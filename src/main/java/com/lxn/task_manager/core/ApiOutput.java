@@ -50,7 +50,7 @@ public class ApiOutput<T> {
     }
 
     public static <T> ApiOutput<T> failure(String errorMessage) {
-        return new ApiOutput<>(0, null, errorMessage,null);
+        return new ApiOutput<>(1, null, errorMessage,null);
     }
     public static <T> ApiOutput<T> failure(String errorMessage,int status) {
         return new ApiOutput<>(status, null, errorMessage,null);
