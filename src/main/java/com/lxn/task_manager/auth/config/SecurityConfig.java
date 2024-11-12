@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -35,17 +34,16 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/api/public/**").permitAll()
-                        .requestMatchers("/api/public/register").permitAll()
                         .anyRequest().authenticated()
-                ).addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
+                )
+                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling(exceptionHandling -> {
                     exceptionHandling
                             .authenticationEntryPoint(customAuthenticationEntryPoint)
                             .accessDeniedHandler(accessDeniedHandler);
                 })
-                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Không tạo session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .httpBasic(Customizer.withDefaults());
 

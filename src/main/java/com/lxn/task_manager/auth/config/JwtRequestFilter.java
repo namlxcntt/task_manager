@@ -30,6 +30,12 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         String email = null;
         String jwt;
 
+        // Skip the /api/public/refreshToken endpoint
+        if (request.getRequestURI().startsWith("/api/public")) {
+            chain.doFilter(request, response);
+            return;
+        }
+
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             jwt = authorizationHeader.substring(7);
             email = jwtUtil.extractEmail(jwt);
