@@ -53,12 +53,13 @@ public class AuthService {
         UserDetails userDetails = userDetailsService.loadUserByUsername(authRequest.getEmail());
         String token = jwtUtil.generateToken(userDetails.getUsername());
         String refreshToken = jwtUtil.generateRefreshToken(userDetails.getUsername());
-        return ResponseEntity.ok(ApiOutput.success(new LoginModel(token, refreshToken)));
+        return ResponseEntity.ok(ApiOutput.success(new LoginModel(token, refreshToken,user.getUserId())));
     }
 
 
     public ResponseEntity<ApiOutput<UserModel>> register(RegisterRequest registerRequest) {
-        if (userServices.findByEmail(registerRequest.getEmail()) != null) {
+        final UserModel userCheck = userServices.findByEmail(registerRequest.getEmail());
+        if (userCheck != null) {
             return ResponseEntity.ok().body(ApiOutput.failure("Email already exists"));
         }
         UserModel user = new UserModel();
@@ -72,7 +73,7 @@ public class AuthService {
 
     public ResponseEntity<ApiOutput<LoginModel>> refreshToken(String oldRefreshToken, String currentToken) {
         if (tokenBlacklistService.isTokenBlacklisted(oldRefreshToken)) {
-            throw new RuntimeException("Invalid refresh token");
+            return ResponseEntity.ok(ApiOutput.failure("Invalid refresh token"));
         }
         tokenBlacklistService.blacklistToken(currentToken);
         tokenBlacklistService.blacklistToken(oldRefreshToken);
@@ -80,7 +81,7 @@ public class AuthService {
         String email = jwtUtil.extractEmail(oldRefreshToken);
         String token = jwtUtil.generateToken(email);
         String refreshToken = jwtUtil.generateRefreshToken(email);
-        LoginModel loginModel = new LoginModel(token, refreshToken);
+        LoginModel loginModel = new LoginModel(token, refreshToken,null);
         return ResponseEntity.ok(ApiOutput.success(loginModel));
     }
 
@@ -93,6 +94,5 @@ public class AuthService {
             return ResponseEntity.badRequest().body(ApiOutput.failure("Invalid token"));
         }
     }
-
 
 }

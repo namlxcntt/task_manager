@@ -12,4 +12,5 @@ import lombok.Setter;
 public class LoginModel {
     private String bearToken;
     private String refreshToken;
+    private Long userId;
 }
